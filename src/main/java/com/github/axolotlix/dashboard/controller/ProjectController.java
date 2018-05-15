@@ -17,22 +17,26 @@ public class ProjectController {
     @Autowired
     ProjectRepository projectRepository;
 
+    //READ-ALL
     @GetMapping("/projects")
     public List<Project> getAllProjects(){
         return projectRepository.findAll();
     }
 
+    //CREATE
     @PostMapping("/projects")
     public Project createProject(@Valid @RequestBody Project project) {
         return projectRepository.save(project);
     }
 
+    //READ
     @GetMapping("/projects/{id}")
     public Project getProjectById(@PathVariable(value = "id") Long projectID) {
         return projectRepository.findById(projectID)
                 .orElseThrow(() -> new ResourceNotFoundException("Note", "id", projectID));
     }
 
+    //UPDATE
     @PutMapping("/projects/{id}")
     public Project updateProject(@PathVariable(value = "id") Long projectId, @Valid @RequestBody Project projectDetails) {
         Project project = projectRepository.findById(projectId)
@@ -47,6 +51,7 @@ public class ProjectController {
         return updatedProject;
     }
 
+    //DELETE
     @DeleteMapping("/projects/{id}")
     public ResponseEntity<?> deleteProject(@PathVariable(value = "id") Long projectId) {
         Project project = projectRepository.findById(projectId)

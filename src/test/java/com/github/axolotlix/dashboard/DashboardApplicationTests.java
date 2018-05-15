@@ -11,6 +11,7 @@ public class DashboardApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		;
 	}
 
 }
